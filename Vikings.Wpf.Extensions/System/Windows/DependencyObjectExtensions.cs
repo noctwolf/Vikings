@@ -5,11 +5,11 @@ namespace System.Windows
 {
     public static class DependencyObjectExtensions
     {
-        public static IEnumerable<DependencyObject> All(this DependencyObject dependencyObject, bool containsParent = false)
+        public static IEnumerable<DependencyObject> All(this DependencyObject dependencyObject, bool includeParent = false)
         {
             yield return dependencyObject;
             foreach (var result in dependencyObject.Child()) yield return result;
-            if (containsParent)
+            if (includeParent)
             {
                 while (LogicalTreeHelper.GetParent(dependencyObject) is DependencyObject parent)
                 {
