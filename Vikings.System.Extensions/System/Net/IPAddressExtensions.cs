@@ -21,5 +21,10 @@ namespace System.Net
         {
             return ((uint)value).ToIPAddress();
         }
+
+        public static IPAddress ToIPAddress(this long value)
+        {
+            return ((uint)value).ToIPAddress();
+        }
     }
 }
