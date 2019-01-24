@@ -2,7 +2,7 @@
 
 namespace System.Windows
 {
-    public class MessageBoxException
+    public class MessageBoxException: Exception
     {
         public MessageBoxException(string messageBoxText, string caption = null, MessageBoxImage icon = MessageBoxImage.None)
         {
