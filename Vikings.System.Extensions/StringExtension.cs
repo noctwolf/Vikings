@@ -1,6 +1,8 @@
-﻿namespace System
+﻿using System.Linq;
+
+namespace System
 {
-    public static class StringExtensions
+    public static class StringExtension
     {
         public static string Substring(this string value, string start, string end)
         {
@@ -13,5 +15,8 @@
             }
             return null;
         }
+
+        public static string ToValidFileName(this string value) => 
+            string.Join("", value?.ToCharArray().Where(c => !IO.Path.GetInvalidFileNameChars().Contains(c)));
     }
 }
