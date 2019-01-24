@@ -7,7 +7,7 @@
     <ProjectGuid>{497694BE-5675-4E68-A332-9001C35AA927}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Vikings.Swf.Extensions</RootNamespace>
+    <RootNamespace>System</RootNamespace>
     <AssemblyName>Vikings.Swf.Extensions</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -45,7 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="System\Windows\Forms\ControlExtensions.cs" />
+    <Compile Include="Windows\Forms\ControlExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

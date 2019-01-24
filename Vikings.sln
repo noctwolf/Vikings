@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vikings.Swf.Extensions", "V
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vikings.Translate", "Vikings.Translate\Vikings.Translate.csproj", "{634270F6-D24F-4DA6-BC5A-46F5430B8524}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vikings.Swf", "Vikings.Swf\Vikings.Swf.csproj", "{3966B209-0059-4EAA-9E15-AFB01D1AAE36}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vikings.Base", "Vikings.Base\Vikings.Base.csproj", "{95B4E7D8-420D-4B3A-BAF3-D840DDDA46FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{634270F6-D24F-4DA6-BC5A-46F5430B8524}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{634270F6-D24F-4DA6-BC5A-46F5430B8524}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{634270F6-D24F-4DA6-BC5A-46F5430B8524}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3966B209-0059-4EAA-9E15-AFB01D1AAE36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3966B209-0059-4EAA-9E15-AFB01D1AAE36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3966B209-0059-4EAA-9E15-AFB01D1AAE36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3966B209-0059-4EAA-9E15-AFB01D1AAE36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95B4E7D8-420D-4B3A-BAF3-D840DDDA46FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95B4E7D8-420D-4B3A-BAF3-D840DDDA46FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95B4E7D8-420D-4B3A-BAF3-D840DDDA46FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95B4E7D8-420D-4B3A-BAF3-D840DDDA46FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
