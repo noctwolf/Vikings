@@ -2,7 +2,7 @@
 
 namespace System.Windows.Forms
 {
-    public static class ControlExtensions
+    public static class ControlExtension
     {
         public static IEnumerable<Control> All(this Control value, bool includeHasChildren = false)
         {
