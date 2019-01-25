@@ -4,6 +4,20 @@ namespace System.Windows
 {
     public class MessageBoxException: Exception
     {
+        static MessageBoxException()
+        {
+            Application.Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
+        }
+
+        private static void Current_DispatcherUnhandledException(object sender, Threading.DispatcherUnhandledExceptionEventArgs e)
+        {
+            if (!e.Handled && e.Exception is MessageBoxException mbe)
+            {
+                e.Handled = true;
+                mbe.Show();
+            }
+        }
+
         public MessageBoxException(string messageBoxText, string caption = null, MessageBoxImage icon = MessageBoxImage.None)
         {
             MessageBoxText = messageBoxText;
