@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace System.Windows
 {
-    public static class DependencyObjectExtensions
+    public static class DependencyObjectExtension
     {
         public static IEnumerable<DependencyObject> All(this DependencyObject dependencyObject, bool includeParent = false)
         {
