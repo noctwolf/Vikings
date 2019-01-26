@@ -7,19 +7,25 @@ using System.Text.RegularExpressions;
 
 namespace Vikings.Translate
 {
+    /// <summary>
+    /// 谷歌翻译
+    /// </summary>
     public static class GoogleTranslate
     {
+        /// <summary>
+        /// 翻译地址，默认是https://translate.google.cn/，可切换到https://translate.google.com/
+        /// </summary>
         public static string BaseUrl { get; set; } = "https://translate.google.cn/";
 
         /// <summary>
-        /// 翻译为简体中文 
+        /// 翻译为简体中文
         /// </summary>
-        /// <param name="text"></param>
-        /// <returns></returns>
+        /// <param name="text">待翻译文本</param>
+        /// <returns>翻译后文本</returns>
         public static string ToZhHans(string text) => Translate(text, "auto", "zh-CN");
 
         /// <summary>
-        /// 谷歌翻译
+        /// 翻译
         /// </summary>
         /// <param name="text">待翻译文本</param>
         /// <param name="fromLanguage">自动检测：auto</param>
