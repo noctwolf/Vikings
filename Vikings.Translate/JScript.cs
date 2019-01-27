@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace Vikings.Translate
 {
-    public static class JScript
+    static class JScript
     {
         static MethodInfo infoGetTK;
 
