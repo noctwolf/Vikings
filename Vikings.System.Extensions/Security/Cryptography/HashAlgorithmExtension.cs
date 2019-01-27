@@ -2,12 +2,22 @@
 
 namespace System.Security.Cryptography
 {
+    /// <summary>
+    /// HashAlgorithm 扩展
+    /// </summary>
     public static class HashAlgorithmExtension
     {
-        public static byte[] ComputeHash(this HashAlgorithm hashAlgorithm, Stream inputStream, Action action)
+        /// <summary>
+        /// 计算指定 <see cref="Stream"/> 对象的哈希值。
+        /// </summary>
+        /// <param name="hashAlgorithm">要计算的哈希算法</param>
+        /// <param name="inputStream">要计算其哈希代码的输入</param>
+        /// <param name="streamReadAction">没次读流时调用，例如用来获取进度</param>
+        /// <returns>计算所得的哈希代码</returns>
+        public static byte[] ComputeHash(this HashAlgorithm hashAlgorithm, Stream inputStream, Action streamReadAction)
         {
-            using (var ps = new ReadStream(inputStream, action))
-                return hashAlgorithm.ComputeHash(ps);
+            using (var readStream = new ReadStream(inputStream, streamReadAction))
+                return hashAlgorithm.ComputeHash(readStream);
         }
 
         class ReadStream : Stream

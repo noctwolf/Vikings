@@ -20,7 +20,7 @@ namespace System.Windows
         /// <remarks>后续代码可使用Linq</remarks>
         /// <param name="dependencyObject">要枚举的逻辑树节点</param>
         /// <param name="includeParent">是否包含父</param>
-        /// <returns>先子后父、先近后远的顺序</returns>
+        /// <returns>可枚举集合。先子后父、先近后远的顺序</returns>
         public static IEnumerable<DependencyObject> All(this DependencyObject dependencyObject, bool includeParent = false)
         {
             yield return dependencyObject;
@@ -42,7 +42,7 @@ namespace System.Windows
         /// <remarks>后续代码可使用Linq</remarks>
         /// <param name="dependencyObject">要枚举的逻辑树节点</param>
         /// <param name="exclude">内部使用，用于遍历父时排除自己</param>
-        /// <returns>先近后远的顺序</returns>
+        /// <returns>可枚举集合。先近后远的顺序</returns>
         public static IEnumerable<DependencyObject> Child(this DependencyObject dependencyObject, DependencyObject exclude = null)
         {
             foreach (var item in LogicalTreeHelper.GetChildren(dependencyObject).OfType<DependencyObject>())
