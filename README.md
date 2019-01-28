@@ -23,6 +23,6 @@ So, you can use LINQ functions like Any() Where() to retrieval controls
 - Google 翻译调用，简化代码，一行搞定
 - Google translation, very simple, only one line
 ### Usage:
-Vikings.Translate.Translate("some text to be translate","original language code,like en-US, support 'auto'","target language code, like zh-CN")  
+- Vikings.Translate.Translate("some text to be translate","original language code,like en-US, support 'auto'","target language code, like zh-CN")  
 
 		Vikings.Translate.Translate("新年快乐！","auto","en-US");
