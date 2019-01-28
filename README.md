@@ -7,20 +7,28 @@
 - .NET WinForm和WPF的扩展，将LINQ引入界面控件查询。其主要目的在于简化代码并提高代码可读性。
 - .NET WinForm and WPF extension, introducing LINQ to UI controls retrieval. Its main purpose is code reducing and readability improving.
 ### Usage: 
-(some winform object).All() return a IEnumable object contained all UI controls in the given win form Control object
-*DEMO*
+(some winform object).All() return a IEnumable object contained all UI controls in the given win form Control object   
+
+*DEMO*   
+
 		form.All().Where(c => c.Title == "Ok");
-(some WPF form object).All() return a IEnumable object contained all UI controls in the given WPF form object
-(some WPF form object).Child() return a IEnumable object contained all child UI controls in the given WPF form object
-*DEMO*
+
+(some WPF form object).All() return a IEnumable object contained all UI controls in the given WPF form object  
+
+(some WPF form object).Child() return a IEnumable object contained all child UI controls in the given WPF form object  
+
+*DEMO*  
+
 		form.All().Where(c => c.Title =="Cancel");
-		form.Child().Where(c => c.Title =="OK");
+		form.Child().Where(c => c.Title =="OK");  
+
 So, you can use LINQ functions like Any() Where() to retrieval controls
 	
 ## Vikings.Translate
 - Google 翻译调用，简化代码，一行搞定
 - Google translation, very simple, only one line
 ### Usage: - 
-Vikings.Translate.Translate("some text to be translate","original language code,like en-US, support 'auto'","target language code, like zh-CN")
+Vikings.Translate.Translate("some text to be translate","original language code,like en-US, support 'auto'","target language code, like zh-CN")  
+
 *DEMO*
 		Vikings.Translate.Translate("新年快乐！","auto","en-US");
