@@ -66,7 +66,6 @@
     <Compile Include="CodeDom\CodeExpressionExtension.cs" />
     <Compile Include="Drawing\ImageExtension.cs" />
     <Compile Include="Int32Extension.cs" />
-    <Compile Include="ExceptionExtension.cs" />
     <Compile Include="Linq\ClassExtension.cs" />
     <Compile Include="Net\IPAddressExtension.cs" />
     <Compile Include="Net\WebClientExtension.cs" />
