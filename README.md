@@ -10,10 +10,10 @@
 - (some winform object).All() return a IEnumable object contained all UI controls in the given win form Control object   
 - (some WPF form object).All() return a IEnumable object contained all UI controls in the given WPF form object  
 - (some WPF form object).Child() return a IEnumable object contained all child UI controls in the given WPF form object  
-
-	if (!this.All().OfType<CheckBox>().Any(f => f.IsChecked == true))
-		MessageBox.Show("请至少选择一个");
-
+```C#
+if (!this.All().OfType<CheckBox>().Any(f => f.IsChecked == true))
+	MessageBox.Show("请至少选择一个");
+```
 So, you can use LINQ functions like Any() Where() to retrieval controls
 	
 ## Vikings.Translate
@@ -21,6 +21,6 @@ So, you can use LINQ functions like Any() Where() to retrieval controls
 - Google translation, very simple, only one line
 ### Usage:
 - Vikings.Translate.Translate("some text to be translate","original language code,like en-US, support 'auto'","target language code, like zh-CN")
-	
-	Vikings.Translate.GoogleTranslate.Translate("新年快乐！","auto","en-US");
-	
+```C#
+Vikings.Translate.GoogleTranslate.Translate("新年快乐！","auto","en-US");
+```
