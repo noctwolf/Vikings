@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -33,8 +32,7 @@ namespace Vikings.Translate
         /// <returns>翻译后文本</returns>
         public static string Translate(string text, string fromLanguage, string toLanguage)
         {
-            //.NET 的uri会屏蔽特殊字符，UrlEncode 后是 %e2%80%8e，导致计算的tk不一致
-            text = string.Join("", text.ToCharArray().Where(f => !"\u200B\u200C\u200D\u200E\u200F\uFEFF".Contains(f)));
+            text = text.StripBidiControlCharacter();
             var cc = new CookieContainer();
             var tk = JScript.GetTK(text, GetTKK(BaseUrl, cc));
             string googleTransUrl = BaseUrl + "translate_a/single?client=webapp&sl=" + fromLanguage + "&tl=" + toLanguage + "&hl=en&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=1&tk=" + tk + "&q=" + WebUtility.UrlEncode(text);

@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Windows.Media;
 
 namespace System.Windows
 {
@@ -16,11 +17,14 @@ namespace System.Windows
         /// <see cref="bool" /> 类型的 <see cref="System.Nullable&lt;T&gt;" /> 值， 该值指定活动被接受 (<see langword="true" />) 还是被取消 (<see langword="false" />)。
         /// 返回值是 <see cref="Window.DialogResult" /> 属性在窗口关闭前具有的值
         /// </returns>
-        public static bool? ShowDialog(this Window window, FrameworkElement owner)
+        public static bool? ShowDialog(this Window window, DependencyObject owner)
         {
-            while (!(owner != null && owner is Window)) owner = owner.Parent as FrameworkElement;
-            owner = owner ?? Application.Current.Windows.OfType<Window>().Single(f => f.IsActive);
-            window.Owner = owner as Window;
+            if (window.Owner == null)
+            {
+                while (!(owner == null || owner is Window)) owner = VisualTreeHelper.GetParent(owner);
+                window.Owner = owner is Window ownerWindow ? ownerWindow : Application.Current.Windows.OfType<Window>().Single(f => f.IsActive);
+            }
+            if (window.Owner != null) window.ShowInTaskbar = false;
             return window.ShowDialog();
         }
     }

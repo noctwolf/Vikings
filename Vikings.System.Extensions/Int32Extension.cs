@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace System
@@ -26,20 +27,23 @@ namespace System
         /// <summary>
         /// 将数值转换为字符串，该字符串表示以字节，KB，MB或GB表示的大小值表示的数字，具体取决于大小。
         /// </summary>
-        /// <param name="value">要转换的数值</param>
+        /// <param name="length">要转换的数值</param>
         /// <returns>数值字符串</returns>
-        public static string ToByteSize(this int value) => FormatByteSize(value);
+        public static string ToByteSize(this int length) => ((long)length).ToByteSize();
 
         /// <summary>
         /// 将数值转换为字符串，该字符串表示以字节，KB，MB或GB表示的大小值表示的数字，具体取决于大小。
         /// </summary>
         /// <param name="length">要转换的数值</param>
         /// <returns>数值字符串</returns>
-        public static string FormatByteSize(this long length)
+        public static string ToByteSize(this long length)
         {
             StringBuilder sb = new StringBuilder(64);
-            Vanara.PInvoke.ShlwApi.StrFormatByteSizeW(length, sb, (uint)sb.Capacity);
+            StrFormatByteSizeW(length, sb, sb.Capacity);
             return sb.ToString();
         }
+
+        [DllImport("shlwapi", CharSet = CharSet.Unicode)]
+        static extern IntPtr StrFormatByteSizeW(long qdw, StringBuilder pszBuf, int cchBuf);
     }
 }
