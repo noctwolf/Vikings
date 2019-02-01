@@ -4,7 +4,7 @@
         <Identity Id="Vikings.CodeHelper.d2c55ab0-7c69-4b63-acfd-08dbbbad1b33" Version="1.6" Language="zh-CN" Publisher="noctwolf" />
         <DisplayName>Vikings.CodeHelper</DisplayName>
         <Description xml:space="preserve">CodeSite方法追踪器</Description>
-        <ReleaseNotes>ReleaseNotes.html</ReleaseNotes>
+        <ReleaseNotes>ReleaseNotes.txt</ReleaseNotes>
         <Icon>Resources\CodeHelperPackage.ico</Icon>
     </Metadata>
     <Installation>
@@ -20,6 +20,5 @@
     </Prerequisites>
     <Assets>
         <Asset Type="Microsoft.VisualStudio.VsPackage" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%;PkgdefProjectOutputGroup|" />
-      <Asset Type="Microsoft.VisualStudio.ToolboxControl" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%;PkgdefProjectOutputGroup|" />
-  </Assets>
+    </Assets>
 </PackageManifest>

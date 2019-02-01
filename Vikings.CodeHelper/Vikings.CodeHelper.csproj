@@ -84,13 +84,14 @@
       <ResourceName>Menus.ctmenu</ResourceName>
     </VSCTCompile>
     <Content Include="index.html" />
-    <Content Include="ReleaseNotes.html">
+    <Content Include="ReleaseNotes.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Resource Include="Resources\CodeHelperPackage.ico">
+    <Content Include="Resources\CodeHelperPackage.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="Resources\CodeSiteCmd.png" />
     <Content Include="stylesheet.css" />
   </ItemGroup>
