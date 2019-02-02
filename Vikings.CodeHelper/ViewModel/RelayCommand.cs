@@ -15,6 +15,8 @@ namespace Vikings.CodeHelper.ViewModel
 
         public event EventHandler CanExecuteChanged;
 
+        protected virtual void OnCanExecuteChanged() => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+
         public bool CanExecute(object parameter) => true;
 
         public void Execute(object parameter) => ExecuteAction();

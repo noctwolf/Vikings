@@ -56,15 +56,17 @@
   <ItemGroup>
     <Compile Include="CodeHelperPackage.cs" />
     <Compile Include="CodeSiteCmd.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\CodeFunctionExtension.cs" />
     <Compile Include="ViewModel\CodeSiteViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
-    <Compile Include="ViewModel\TreeItem.cs" />
+    <Compile Include="ViewModel\CodeElementViewModel.cs" />
     <Compile Include="View\BaseDialogWindow.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\CodeSiteWindow.xaml.cs">
@@ -72,7 +74,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Key.snk" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -102,7 +106,7 @@
   <ItemGroup>
     <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <HintPath>..\packages\EnvDTE.8.0.2\lib\net10\EnvDTE.dll</HintPath>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="EnvDTE100, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <EmbedInteropTypes>False</EmbedInteropTypes>
@@ -207,6 +211,7 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Raize.CodeSiteLogging, Version=5.3.2.0, Culture=neutral, PublicKeyToken=5979856d688ff136, processorArchitecture=MSIL" />
     <Reference Include="stdole, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <HintPath>..\packages\stdole.7.0.3303\lib\net10\stdole.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -260,6 +265,9 @@
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="Vikings.CodeSite.Extensions, Version=1.0.0.1, Culture=neutral, PublicKeyToken=3aea1368b1037c36, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vikings.CodeSite.Extensions.1.0.0.1\lib\net45\Vikings.CodeSite.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>

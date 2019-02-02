@@ -3,6 +3,8 @@ using System.ComponentModel.Design;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using EnvDTE;
+using Microsoft;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Vikings.CodeHelper.View;
@@ -42,29 +44,19 @@ namespace Vikings.CodeHelper
             commandService = commandService ?? throw new ArgumentNullException(nameof(commandService));
 
             var menuCommandID = new CommandID(CommandSet, CommandId);
-            var menuItem = new MenuCommand(this.Execute, menuCommandID);
+            var menuItem = new MenuCommand(Execute, menuCommandID);
             commandService.AddCommand(menuItem);
         }
 
         /// <summary>
         /// Gets the instance of the command.
         /// </summary>
-        public static CodeSiteCmd Instance
-        {
-            get;
-            private set;
-        }
+        public static CodeSiteCmd Instance { get; private set; }
 
         /// <summary>
         /// Gets the service provider from the owner package.
         /// </summary>
-        private Microsoft.VisualStudio.Shell.IAsyncServiceProvider ServiceProvider
-        {
-            get
-            {
-                return this.package;
-            }
-        }
+        private Microsoft.VisualStudio.Shell.IAsyncServiceProvider ServiceProvider => package;
 
         /// <summary>
         /// Initializes the singleton instance of the command.
@@ -87,10 +79,10 @@ namespace Vikings.CodeHelper
         /// </summary>
         /// <param name="sender">Event sender.</param>
         /// <param name="e">Event args.</param>
-        private void Execute(object sender, EventArgs e)
+        private async void Execute(object sender, EventArgs e)
         {
-            ThreadHelper.ThrowIfNotOnUIThread();
-            new CodeSiteWindow().ShowModal();
+            await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
+            if (await CheckCodeModelAsync()) new CodeSiteWindow().ShowModal();
             //string message = string.Format(CultureInfo.CurrentCulture, "Inside {0}.MenuItemCallback()", this.GetType().FullName);
             //string title = "CodeSiteCmd";
 
@@ -102,6 +94,41 @@ namespace Vikings.CodeHelper
             //    OLEMSGICON.OLEMSGICON_INFO,
             //    OLEMSGBUTTON.OLEMSGBUTTON_OK,
             //    OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
+        }
+
+        async Task<bool> CheckCodeModelAsync()
+        {
+            await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
+            try
+            {
+                DTE dte = await package.GetServiceAsync(typeof(DTE)) as DTE;
+                Assumes.Present(dte);
+                Document doc = dte.ActiveDocument;
+                if (doc == null)
+                    ShowMessage("没有活动文档");
+                else
+                {
+                    FileCodeModel fcm = doc.ProjectItem.FileCodeModel;
+                    if (fcm == null)
+                        ShowMessage("活动文档没有代码模型");
+                    else if (!fcm.Language.Equals(CodeModelLanguageConstants.vsCMLanguageCSharp))
+                        ShowMessage("代码的编程语言不是C#语言");
+                    else
+                        return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.SendCodeSite();
+                ShowMessage("未知异常\r\n" + ex.Message);
+            }
+            return false;
+        }
+
+        void ShowMessage(string message)
+        {
+            VsShellUtilities.ShowMessageBox(package, message, "加载文档",
+                OLEMSGICON.OLEMSGICON_CRITICAL, OLEMSGBUTTON.OLEMSGBUTTON_OK, OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
         }
     }
 }

@@ -56,7 +56,7 @@
         <Parent guid="guidCodeHelperPackageCmdSet" id="MyMenuGroup" />
         <Icon guid="guidImages" id="bmpMenu" />
         <Strings>
-          <ButtonText>CodeSite方法追踪器</ButtonText>
+          <ButtonText>CodeSite方法跟踪器</ButtonText>
         </Strings>
       </Button>
     </Buttons>
