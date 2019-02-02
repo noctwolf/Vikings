@@ -72,6 +72,7 @@
     <Compile Include="View\CodeSiteWindow.xaml.cs">
       <DependentUpon>CodeSiteWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\vsCMElement\vsCMElementConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
@@ -88,6 +89,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="View\vsCMElement\vsCMElementClass.png" />
+    <Resource Include="View\vsCMElement\vsCMElementFunction.png" />
+    <Resource Include="View\vsCMElement\vsCMElementNamespace.png" />
+    <Resource Include="View\vsCMElement\vsCMElementProperty.png" />
+    <Resource Include="View\vsCMElement\vsCMElementStruct.png" />
     <VSCTCompile Include="CodeHelperPackage.vsct">
       <ResourceName>Menus.ctmenu</ResourceName>
     </VSCTCompile>
@@ -287,6 +293,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets" Condition="'$(VSToolsPath)' != ''" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

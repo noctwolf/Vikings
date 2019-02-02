@@ -5,17 +5,57 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Vikings.CodeHelper.View"
              xmlns:ViewModel="clr-namespace:Vikings.CodeHelper.ViewModel"
+             xmlns:PlatformUI="clr-namespace:Microsoft.VisualStudio.PlatformUI;assembly=Microsoft.VisualStudio.Shell.15.0"
+             xmlns:vsCMElement="clr-namespace:Vikings.CodeHelper.View.vsCMElement"
              x:Class="Vikings.CodeHelper.View.CodeSiteWindow"
-             mc:Ignorable="d" Title="CodeSite Method Tracer for C#" Width="400" Height="450" WindowStartupLocation="CenterOwner">
+             mc:Ignorable="d" Title="CodeSite Method Tracer for C#" Width="480" Height="540" WindowStartupLocation="CenterOwner">
     <local:BaseDialogWindow.Resources>
+        <vsCMElement:VsCMElementConverter x:Key="VsCMElementConverter"/>
         <HierarchicalDataTemplate DataType="{x:Type ViewModel:CodeElementViewModel}" ItemsSource="{Binding}">
-           <TextBlock Text="{Binding Name}" />             
+            <StackPanel Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding IsChecked}"/>
+                <Image Source="{Binding CodeElement.Kind, Converter={StaticResource VsCMElementConverter}, Mode=OneWay}"/>
+                <TextBlock Text="{Binding Name}" />
+            </StackPanel>
         </HierarchicalDataTemplate>
+        <Style TargetType="{x:Type TreeViewItem}">
+            <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
+            <Setter Property="IsSelected" Value="{Binding IsSelected}"/>
+        </Style>
     </local:BaseDialogWindow.Resources>
     <local:BaseDialogWindow.DataContext>
         <ViewModel:CodeSiteViewModel/>
     </local:BaseDialogWindow.DataContext>
-    <Grid>
-        <TreeView ItemsSource="{Binding CodeElementViewModel}"/>
-    </Grid>
+    <DockPanel Margin="8">
+        <TextBlock Text="CodeSite方法跟踪器提供了一种快速简便的方法，可以从当前单元中的方法插入/删除CodeSite EnterMethod和ExitMethod语句。" DockPanel.Dock="Top" TextWrapping="Wrap" />
+        <Grid DockPanel.Dock="Bottom">
+            <CheckBox VerticalAlignment="Center" Content="包含catch" />
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                <Button Content="确定" Width="75" Height="23" Margin="0,0,8,0" IsDefault="True" />
+                <Button Content="取消" Width="75" IsCancel="True" />
+            </StackPanel>
+        </Grid>
+        <Grid DockPanel.Dock="Top" Margin="0,8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+            <TreeView ItemsSource="{Binding CodeElementViewModel}" Grid.Row="1" Margin="0,8,8,8"/>
+            <TextBox x:Name="textBoxFind" Margin="0,8,8,8" VerticalContentAlignment="Center"/>
+            <Grid Grid.Column="1" Margin="0,8">
+                <Button Content="上一个" HorizontalAlignment="Left" Height="23" Width="48"/>
+                <Button Content="下一个" HorizontalAlignment="Right" Width="48"/>
+            </Grid>
+            <StackPanel Grid.Column="1" Grid.Row="1" Margin="0,8">
+                <Button Content="全部跟踪" Height="23"/>
+                <Button Content="全部不跟踪" Height="23" Margin="0,5,0,0"/>
+                <Button Content="全部展开" Height="23" Margin="0,10,0,0"/>
+                <Button Content="全部折叠" Height="23" Margin="0,5,0,0"/>
+            </StackPanel>
+        </Grid>
+    </DockPanel>
 </local:BaseDialogWindow>

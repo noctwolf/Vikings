@@ -17,10 +17,17 @@ namespace Vikings.CodeHelper.ViewModel
 
         public CodeSiteViewModel()
         {
-            ThreadHelper.ThrowIfNotOnUIThread();
             dte = Package.GetGlobalService(typeof(DTE)) as DTE;
-            if (dte == null) return;
-            CodeElementViewModel.LoadChildren(dte.ActiveDocument.ProjectItem.FileCodeModel.CodeElements);
+            if (dte == null)
+            {
+                CodeElementViewModel.Add(new CodeElementViewModel(null));
+                CodeElementViewModel.Add(new CodeElementViewModel(null));
+            }
+            else
+            {
+                CodeElementViewModel.LoadChildren(dte.ActiveDocument.ProjectItem.FileCodeModel.CodeElements);
+                CodeElementViewModel.All().Where(f => f.IsCodeFunction).ToList().ForEach(f => f.IsChecked = f.ExistsCodeSite);
+            }
         }
     }
 }
