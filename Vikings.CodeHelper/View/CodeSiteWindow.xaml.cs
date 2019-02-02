@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Vikings.CodeHelper.Views
+namespace Vikings.CodeHelper.View
 {
     /// <summary>
     /// CodeSiteWindow.xaml 的交互逻辑

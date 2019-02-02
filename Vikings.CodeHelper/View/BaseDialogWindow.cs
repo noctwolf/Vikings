@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Vikings.CodeHelper.Views
+namespace Vikings.CodeHelper.View
 {
     public class BaseDialogWindow : DialogWindow
     {

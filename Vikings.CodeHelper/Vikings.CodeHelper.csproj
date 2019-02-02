@@ -62,8 +62,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Views\BaseDialogWindow.cs" />
-    <Compile Include="Views\CodeSiteWindow.xaml.cs">
+    <Compile Include="ViewModel\CodeSiteViewModel.cs" />
+    <Compile Include="ViewModel\RelayCommand.cs" />
+    <Compile Include="ViewModel\TreeItem.cs" />
+    <Compile Include="View\BaseDialogWindow.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="View\CodeSiteWindow.xaml.cs">
       <DependentUpon>CodeSiteWindow.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -270,7 +274,7 @@
     <Analyzer Include="..\packages\Microsoft.VisualStudio.Threading.Analyzers.15.8.209\analyzers\cs\Microsoft.VisualStudio.Threading.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\CodeSiteWindow.xaml">
+    <Page Include="View\CodeSiteWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
