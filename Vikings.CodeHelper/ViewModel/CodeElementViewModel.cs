@@ -1,6 +1,5 @@
 ﻿using EnvDTE;
 using EnvDTE80;
-using Microsoft.VisualStudio.Shell;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,15 +7,14 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Vikings.CodeHelper.ViewModel
 {
     public class CodeElementViewModel : ObservableCollection<CodeElementViewModel>
     {
-        const string codeSiteName = "Raize.CodeSiteLogging";
-        static CodeImport codeSiteCodeImport;
+        public const string CodeSiteName = "Raize.CodeSiteLogging";
+
+        public static CodeImport CodeSiteCodeImport { get; set; }
 
         protected virtual void RaisePropertyChanged([CallerMemberName]string propertyName = null) =>
             OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
@@ -56,8 +54,8 @@ namespace Vikings.CodeHelper.ViewModel
             switch (item.Kind)
             {
                 case vsCMElement.vsCMElementImportStmt:
-                    if (item is CodeImport codeImport && codeImport.Namespace == codeSiteName)
-                        codeSiteCodeImport = codeImport;
+                    if (item is CodeImport codeImport && codeImport.Namespace == CodeSiteName)
+                        CodeSiteCodeImport = codeImport;
                     break;
                 case vsCMElement.vsCMElementClass:
                 case vsCMElement.vsCMElementProperty:
@@ -70,6 +68,13 @@ namespace Vikings.CodeHelper.ViewModel
                 default:
                     break;
             }
+        }
+
+        internal void Sort()
+        {
+            var list = this.OrderBy(f => f.Name).ToList();
+            Clear();
+            list.ForEach(f => { f.Sort(); Add(f); });
         }
 
         public CodeElementViewModel Parent { get; private set; }
@@ -108,7 +113,7 @@ namespace Vikings.CodeHelper.ViewModel
             set
             {
                 if (isChecked == value || inChecked) return;
-                inChecked = true;            ;
+                inChecked = true;
                 isChecked = value;
                 //设置子
                 if (isChecked.HasValue) this.ToList().ForEach(f => f.IsChecked = isChecked);

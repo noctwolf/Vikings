@@ -16,3 +16,4 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "VSTHRD010:在主线程上调用单线程类型", Justification = "<挂起>", Scope = "member", Target = "~M:Vikings.CodeHelper.ViewModel.CodeElementViewModel.#ctor(EnvDTE.CodeElement)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "VSTHRD010:在主线程上调用单线程类型", Justification = "<挂起>", Scope = "member", Target = "~M:Vikings.CodeHelper.ViewModel.CodeElementViewModel.LoadChild(EnvDTE.CodeElement)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "VSTHRD010:在主线程上调用单线程类型", Justification = "<挂起>", Scope = "member", Target = "~M:Vikings.CodeHelper.ViewModel.CodeSiteViewModel.#ctor")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "VSTHRD010:在主线程上调用单线程类型", Justification = "<挂起>", Scope = "member", Target = "~P:Vikings.CodeHelper.ViewModel.CodeSiteViewModel.OkCommand")]
