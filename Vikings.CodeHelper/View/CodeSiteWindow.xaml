@@ -36,7 +36,7 @@
     <DockPanel Margin="8">
         <TextBlock Text="CodeSite方法跟踪器提供了一种快速简便的方法，可以从当前单元中的方法插入/删除CodeSite EnterMethod和ExitMethod语句。" DockPanel.Dock="Top" TextWrapping="Wrap" />
         <Grid DockPanel.Dock="Bottom">
-            <CheckBox VerticalAlignment="Center" Content="包含catch" />
+            <CheckBox VerticalAlignment="Center" Content="包含catch" IsChecked="{Binding IncludeCatch}" />
             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                 <Button Content="确定" Width="75" Height="23" Margin="0,0,8,0" IsDefault="True" Command="{Binding OkCommand, Mode=OneWay}" Click="Button_Click" />
                 <Button Content="取消" Width="75" IsCancel="True" />

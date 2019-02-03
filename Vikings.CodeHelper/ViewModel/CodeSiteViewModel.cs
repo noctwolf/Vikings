@@ -60,11 +60,7 @@ namespace Vikings.CodeHelper.ViewModel
             if (find != null) find.IsSelected = true;
         }
 
-        public bool IncludeCatch
-        {
-            get => Properties.Settings.Default.IncludeCatch;
-            set => Properties.Settings.Default.IncludeCatch = value;
-        }
+        public bool IncludeCatch { get; set; } = Properties.Settings.Default.IncludeCatch;
 
         RelayCommand okCommand;
         public RelayCommand OkCommand => okCommand ?? (okCommand = new RelayCommand(() =>
@@ -85,7 +81,14 @@ namespace Vikings.CodeHelper.ViewModel
                     FileCodeModel2 fcm2 = (FileCodeModel2)dte.ActiveDocument.ProjectItem.FileCodeModel;
                     fcm2.AddImport(CodeElementViewModel.CodeSiteName, 0, null);
                 }
-                CodeElementViewModel.All().Where(f => f.IsCodeFunction && f.ExistsCodeSite != f.IsChecked).ToList().ForEach(f =>
+                bool catchChanged = Properties.Settings.Default.IncludeCatch != IncludeCatch;
+                if (catchChanged)
+                {
+                    Properties.Settings.Default.IncludeCatch = IncludeCatch;
+                    Properties.Settings.Default.Save();
+                }
+                CodeElementViewModel.All().Where(f => f.IsCodeFunction &&
+                (catchChanged || f.ExistsCodeSite != f.IsChecked)).ToList().ForEach(f =>
                 {
                     Debug.Assert(f.IsChecked.HasValue);
                     if (f.IsChecked == true)
@@ -93,7 +96,6 @@ namespace Vikings.CodeHelper.ViewModel
                     else
                         f.CodeFunction.DeleteCodeSite();
                 });
-                Properties.Settings.Default.Save();
             }
             finally
             {
