@@ -88,7 +88,7 @@ namespace Vikings.CodeHelper.ViewModel
                     Properties.Settings.Default.Save();
                 }
                 CodeElementViewModel.All().Where(f => f.IsCodeFunction &&
-                (catchChanged || f.ExistsCodeSite != f.IsChecked)).ToList().ForEach(f =>
+                (catchChanged && f.IsChecked == true || f.ExistsCodeSite != f.IsChecked)).ToList().ForEach(f =>
                 {
                     Debug.Assert(f.IsChecked.HasValue);
                     if (f.IsChecked == true)
