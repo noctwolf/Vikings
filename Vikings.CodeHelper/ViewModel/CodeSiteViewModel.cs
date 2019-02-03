@@ -1,7 +1,6 @@
 ﻿using EnvDTE;
 using EnvDTE80;
 using Microsoft.VisualStudio.Shell;
-using Raize.CodeSiteLogging;
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -48,17 +47,16 @@ namespace Vikings.CodeHelper.ViewModel
 
         void Find(bool? isNext = null)
         {
-            CodeSite.Send("isNext", isNext);
             var current = CodeElementViewModel.All().SingleOrDefault(f => f.IsSelected) ?? CodeElementViewModel.First();
             if (!isNext.HasValue)
             {
-                if (current.Name.Contains(FindText)) return;
+                if (current.Name.ToLower().Contains(FindText.ToLower())) return;
                 else isNext = true;
             }
             var list = CodeElementViewModel.All().SkipWhile(f => f != current);
             list = list.Concat(CodeElementViewModel.All().Except(list)).Skip(1);
             if (isNext == false) list = list.Reverse();
-            var find = list.FirstOrDefault(f => f.Name.Contains(FindText));
+            var find = list.FirstOrDefault(f => f.Name.ToLower().Contains(FindText.ToLower()));
             if (find != null) find.IsSelected = true;
         }
 

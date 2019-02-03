@@ -1,5 +1,4 @@
 ﻿using EnvDTE;
-using Raize.CodeSiteLogging;
 using System;
 using System.Linq;
 
@@ -99,10 +98,7 @@ throw;
                     if (editPointFind.FindPattern("=>") && editPointFind.LessThan(codeFunction.EndPoint)) return true;
                 }
             }
-            catch (Exception ex)
-            {
-                CodeSite.SendException(codeFunction.Name, ex);
-            }
+            catch { }
             return false;
         }
 
@@ -123,7 +119,6 @@ throw;
         {
             if (codeFunction.HasExpressionBody())
             {//展开表达式主体为程序块主体，不做逆向处理
-                CodeSite.Send("展开表达式主体为程序块主体", codeFunction.Name);
                 var addReturn = !(codeFunction.Type.TypeKind == vsCMTypeRef.vsCMTypeRefVoid ||
                     codeFunction.Parent is CodeProperty codeProperty && codeFunction.EqualsOffset(codeProperty.Setter));
                 if (codeFunction.HasBody())
@@ -145,7 +140,6 @@ throw;
                     epFind.Delete(2);
                     epFind.Insert("{");
                     if (addReturn) epFind.Insert("return ");
-                    //epEEnd.CharRight();
                     epEEnd.Insert("}");
                 }
             }

@@ -21,6 +21,13 @@
         <Style TargetType="{x:Type TreeViewItem}">
             <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
             <Setter Property="IsSelected" Value="{Binding IsSelected}"/>
+            <EventSetter Event="MouseDoubleClick" Handler="TreeViewItem_MouseDoubleClick"/>
+            <Style.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}"
+                                 Color="{Binding Color, Mode=OneWay, Source={StaticResource {x:Static SystemColors.HighlightBrushKey}}}" />
+                <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}"
+                                 Color="{Binding Color, Mode=OneWay, Source={StaticResource {x:Static SystemColors.HighlightTextBrushKey}}}"/>
+            </Style.Resources>
         </Style>
     </local:BaseDialogWindow.Resources>
     <local:BaseDialogWindow.DataContext>

@@ -1,12 +1,10 @@
-﻿using System;
-using System.ComponentModel.Design;
-using System.Globalization;
-using System.Threading;
-using System.Threading.Tasks;
-using EnvDTE;
+﻿using EnvDTE;
 using Microsoft;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
+using System;
+using System.ComponentModel.Design;
+using System.Threading.Tasks;
 using Vikings.CodeHelper.View;
 using Task = System.Threading.Tasks.Task;
 
@@ -56,7 +54,7 @@ namespace Vikings.CodeHelper
         /// <summary>
         /// Gets the service provider from the owner package.
         /// </summary>
-        private Microsoft.VisualStudio.Shell.IAsyncServiceProvider ServiceProvider => package;
+        //private Microsoft.VisualStudio.Shell.IAsyncServiceProvider ServiceProvider => package;
 
         /// <summary>
         /// Initializes the singleton instance of the command.
@@ -119,7 +117,7 @@ namespace Vikings.CodeHelper
             }
             catch (Exception ex)
             {
-                ex.SendCodeSite();
+                //ex.SendCodeSite();
                 ShowMessage("未知异常\r\n" + ex.Message);
             }
             return false;

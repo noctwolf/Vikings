@@ -10,3 +10,6 @@ v1.5, 2017-12-17
 v1.6, 2018-01-31
 +支持表达式主体
 +添加NuGet包Vikings.CodeSite.Extensions
+v1.7, 2018-02-03
++用WPF重构WinForm窗口
+*修复checked传递
