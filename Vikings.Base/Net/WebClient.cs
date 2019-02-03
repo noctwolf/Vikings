@@ -3,6 +3,9 @@ using System.Net;
 
 namespace Vikings.Net
 {
+    /// <summary>
+    /// 扩展<see cref="System.Net.WebClient"/>
+    /// </summary>
     public class WebClient: System.Net.WebClient
     {
         /// <summary>
@@ -10,6 +13,11 @@ namespace Vikings.Net
         /// </summary>
         public virtual int Timeout { get; set; }
 
+        /// <summary>
+        /// 重载<see cref="System.Net.WebClient.GetWebRequest"/>，设置超时<see cref="WebRequest.Timeout"/>
+        /// </summary>
+        /// <param name="address"></param>
+        /// <returns></returns>
         protected override WebRequest GetWebRequest(Uri address)
         {
             var webRequest = base.GetWebRequest(address);
