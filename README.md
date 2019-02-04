@@ -1,5 +1,6 @@
 ﻿# Vikings
 - Vikings是一个.NET工具包，可在nuget直接下载编译过的包。其主要目的是为.NET框架增加易用的扩展
+- 一些扩展、助手类和CodeSite方法跟踪器
 - Vikings is a .NET coding utility package, binary package avaliable on nuget for Visual Studio. Its main purpose is adding some awesome extensions to .NET Framework.
 
 # Extensions list
