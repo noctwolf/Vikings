@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vikings.CodeSite.Extensions
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vikings.CodeHelper", "Vikings.CodeHelper\Vikings.CodeHelper.csproj", "{53F656BB-F196-40D6-BC85-D45CDC6351A0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vikings.Translate.Tests", "Vikings.Translate.Tests\Vikings.Translate.Tests.csproj", "{05489B51-8D73-46A5-87D1-C8AA81C9CB3F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{53F656BB-F196-40D6-BC85-D45CDC6351A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53F656BB-F196-40D6-BC85-D45CDC6351A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53F656BB-F196-40D6-BC85-D45CDC6351A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05489B51-8D73-46A5-87D1-C8AA81C9CB3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05489B51-8D73-46A5-87D1-C8AA81C9CB3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05489B51-8D73-46A5-87D1-C8AA81C9CB3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05489B51-8D73-46A5-87D1-C8AA81C9CB3F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
