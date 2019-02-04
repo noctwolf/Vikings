@@ -23,12 +23,11 @@ namespace Vikings.Translate
         {
             if (string.IsNullOrEmpty(a) || string.IsNullOrEmpty(TKK)) throw new ArgumentNullException();
             var e = TKK.Split('.');
-            if (!(e.Length == 2 && long.TryParse(e[0], out _) && long.TryParse(e[1], out _))) throw new ArgumentNullException();
-            var h = long.Parse(e[0]);
-            var g = new List<long>();
+            if (!(e.Length == 2 && int.TryParse(e[0], out _) && int.TryParse(e[1], out _))) throw new ArgumentNullException();
+            var g = new List<int>();
             for (int f = 0; f < a.Length; f++)
             {
-                long c = a[f];
+                int c = a[f];
                 if (c < 128) g.Add(c);
                 else
                 {
@@ -43,36 +42,33 @@ namespace Vikings.Translate
                             g.Add(c >> 12 & 63 | 128);
                         }
                         else
-                        {
                             g.Add(c >> 12 | 224);
-                        }
                         g.Add(c >> 6 & 63 | 128);
                     }
                     g.Add(c & 63 | 128);
                 }
             }
-            var r = h;
+            var r = int.Parse(e[0]);
             for (int d = 0; d < g.Count; d++)
             {
                 r += g[d];
-                r = b(r, "+-a^+6");
+                r = B(r, "+-a^+6");
             }
-            r = b(r, "+-3^+b+-f");
-            r ^= long.Parse(e[1]);
-            if (r < 0) r = (r & 2147483647) + 2147483648;
-            r %= 1000000;
-            return r.ToString() + "." + (r ^ h);
+            r = B(r, "+-3^+b+-f");
+            r ^= int.Parse(e[1]);
+            var v = (uint)r % 1000000;
+            return v.ToString() + "." + (v ^ int.Parse(e[0]));
         }
 
-        private static long b(long a, string b)
+        private static int B(int a, string expression)
         {
-            for (int d = 0; d < b.Length - 2; d += 3)
+            for (int i = 0; i < expression.Length - 2; i += 3)
             {
-                var c = b[d + 2] >= 'a' ? b[d + 2] - 87 : long.Parse(b[d + 2].ToString());
-                c = b[d + 1] == '+' ? (uint)a >> (int)c : a << (int)c;
-                a = (int)(b[d] == '+' ? a + c & 4294967295 : a ^ c);
+                var bit = System.Convert.ToInt32(expression[i + 2].ToString(), 16);
+                var offset = expression[i + 1] == '+' ? (int)((uint)a >> bit) : a << bit;
+                a = expression[i] == '+' ? a + offset : a ^ offset;
             }
-            return (int)a;
+            return a;
         }
     }
 }
