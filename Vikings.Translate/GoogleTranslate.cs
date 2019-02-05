@@ -87,7 +87,7 @@ namespace Vikings.Translate
             if (string.IsNullOrEmpty(text)) throw new ArgumentNullException(nameof(text));
             if (string.IsNullOrEmpty(tkk)) throw new ArgumentNullException(nameof(tkk));
             var tkkSplit = tkk.Split('.');
-            if (!(tkkSplit.Length == 2 && int.TryParse(tkkSplit[0], out _) && int.TryParse(tkkSplit[1], out _)))
+            if (!(tkkSplit.Length == 2 && uint.TryParse(tkkSplit[0], out _) && uint.TryParse(tkkSplit[1], out _)))
                 throw new ArgumentException(nameof(tkk));
             var list = new List<int>();
             for (int i = 0; i < text.Length; i++)
@@ -113,7 +113,7 @@ namespace Vikings.Translate
                     list.Add(charCode & 0x3F | 0x80);
                 }
             }
-            int tkk0 = int.Parse(tkkSplit[0]);
+            int tkk0 = (int)uint.Parse(tkkSplit[0]);
             var r = tkk0;
             for (int i = 0; i < list.Count; i++)
             {
@@ -121,7 +121,7 @@ namespace Vikings.Translate
                 r = HashTK(r, "+-a^+6");
             }
             r = HashTK(r, "+-3^+b+-f");
-            r ^= int.Parse(tkkSplit[1]);
+            r ^= (int)uint.Parse(tkkSplit[1]);
             var result = (uint)r % 1000000;
             return $"{result}.{result ^ tkk0}";
         }
