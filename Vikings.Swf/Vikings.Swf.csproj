@@ -38,6 +38,12 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="Vikings.Swf.Extensions, Version=1.0.0.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vikings.Swf.Extensions.1.0.0.4\lib\net45\Vikings.Swf.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Vikings.System.Extensions, Version=1.0.0.5, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vikings.System.Extensions.1.0.0.5\lib\net45\Vikings.System.Extensions.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -55,14 +61,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Vikings.Swf.Extensions\Vikings.Swf.Extensions.csproj">
-      <Project>{497694be-5675-4e68-a332-9001c35aa927}</Project>
-      <Name>Vikings.Swf.Extensions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Vikings.System.Extensions\Vikings.System.Extensions.csproj">
-      <Project>{70825ae5-8125-43b5-acfd-a01bbc151bb3}</Project>
-      <Name>Vikings.System.Extensions</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

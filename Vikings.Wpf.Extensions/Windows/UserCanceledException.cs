@@ -1,7 +1,7 @@
 ﻿namespace System.Windows
 {
     /// <summary>
-    /// 返回，比如用于在 <see cref="Controls.Primitives.ButtonBase.OnClick" /> 中取消 <see cref="Controls.Primitives.ButtonBase.Command" />Command的执行
+    /// 用户取消，比如用于在<see cref="Controls.Primitives.ButtonBase.OnClick"/>中取消<see cref="Controls.Primitives.ButtonBase.Command"/>的执行
     /// </summary>
     public class UserCanceledException: Exception
     {
