@@ -79,7 +79,7 @@ throw;
 
         public static bool EqualsOffset(this CodeFunction codeFunction, CodeFunction other)
         {
-            if (other == null) return false;
+            if (other == null || codeFunction.HasBody() != other.HasBody()) return false;
             if (codeFunction.HasBody())
                 return codeFunction.GetStartPoint(vsCMPart.vsCMPartBody).AbsoluteCharOffset == other.GetStartPoint(vsCMPart.vsCMPartBody).AbsoluteCharOffset;
             else

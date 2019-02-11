@@ -32,5 +32,14 @@ namespace Vikings.CodeHelper.View
                 (codeFunction.DTE.ActiveDocument.Selection as TextSelection).MoveToPoint(textPoint);
             }
         }
+
+        private void TreeView_Selected(object sender, RoutedEventArgs e)
+        {
+            if (e.OriginalSource is TreeViewItem treeViewItem)
+            {
+                treeViewItem.BringIntoView();
+                e.Handled = true;
+            }
+        }
     }
 }

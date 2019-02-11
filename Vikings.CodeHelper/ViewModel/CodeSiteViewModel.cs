@@ -29,11 +29,12 @@ namespace Vikings.CodeHelper.ViewModel
                 CodeElementViewModel.All().Where(f => f.IsCodeFunction).ToList().ForEach(f => f.IsChecked = f.ExistsCodeSite);
             }
             CodeElementViewModel.Sort();
+            if (CodeElementViewModel.Any()) CodeElementViewModel.First().IsSelected = true;
         }
 
         public bool IsEnabled => CodeElementViewModel.Any();
 
-        string findText;
+        string findText = "";
         public string FindText
         {
             get => findText;

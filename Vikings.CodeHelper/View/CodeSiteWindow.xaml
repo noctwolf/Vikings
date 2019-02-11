@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Vikings.CodeHelper.View"
              xmlns:ViewModel="clr-namespace:Vikings.CodeHelper.ViewModel"
-             xmlns:PlatformUI="clr-namespace:Microsoft.VisualStudio.PlatformUI;assembly=Microsoft.VisualStudio.Shell.15.0"
              xmlns:vsCMElement="clr-namespace:Vikings.CodeHelper.View.vsCMElement"
              x:Class="Vikings.CodeHelper.View.CodeSiteWindow"
              mc:Ignorable="d" Title="CodeSite Method Tracer for C#" Width="480" Height="540" WindowStartupLocation="CenterOwner">
@@ -13,7 +12,7 @@
         <vsCMElement:VsCMElementConverter x:Key="VsCMElementConverter"/>
         <HierarchicalDataTemplate DataType="{x:Type ViewModel:CodeElementViewModel}" ItemsSource="{Binding}">
             <StackPanel Orientation="Horizontal">
-                <CheckBox IsChecked="{Binding IsChecked}"/>
+                <CheckBox IsChecked="{Binding IsChecked}" VerticalAlignment="Center"/>
                 <Image Source="{Binding CodeElement.Kind, Converter={StaticResource VsCMElementConverter}, Mode=OneWay}"/>
                 <TextBlock Text="{Binding Name}" />
             </StackPanel>
@@ -51,7 +50,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="100"/>
             </Grid.ColumnDefinitions>
-            <TreeView ItemsSource="{Binding CodeElementViewModel}" Grid.Row="1" Margin="0,8,8,8"/>
+            <TreeView ItemsSource="{Binding CodeElementViewModel}" Grid.Row="1" Margin="0,8,8,8" TreeViewItem.Selected="TreeView_Selected"/>
             <TextBox Margin="0,0,8,0" VerticalContentAlignment="Center" IsEnabled="{Binding IsEnabled, Mode=OneWay}" Text="{Binding FindText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <Grid Grid.Column="1" Margin="0">
                 <Button Content="上一个" HorizontalAlignment="Left" Height="23" Width="48" Command="{Binding FindCommand, Mode=OneWay}" CommandParameter="false"/>
