@@ -33,7 +33,7 @@ namespace System.Net
         /// <typeparam name="T">泛型</typeparam>
         /// <param name="value">要执行的实例</param>
         /// <param name="timeout">超时，毫秒</param>
-        /// <param name="func">异步方法，比如() => <see cref="WebClient.DownloadStringTaskAsync(string)"/></param>
+        /// <param name="func">异步方法，比如() =&gt; <see cref="WebClient.DownloadStringTaskAsync(string)"/></param>
         /// <returns>泛型</returns>
         public static T Execute<T>(this WebClient value, int timeout, Func<Task<T>> func)
         {
