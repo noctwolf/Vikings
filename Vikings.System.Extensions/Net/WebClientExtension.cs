@@ -14,8 +14,8 @@ namespace System.Net
         /// <param name="address">要下载的地址</param>
         /// <param name="timeout">超时，毫秒</param>
         /// <returns>请求的资源</returns>
-        public static string DownloadString(this WebClient value, string address, int timeout) => 
-            value.Execute(timeout, value.DownloadStringTaskAsync(address));
+        public static string DownloadString(this WebClient value, string address, int timeout) =>
+            value.Execute(timeout, () => value.DownloadStringTaskAsync(address));
 
         /// <summary>
         /// 下载指定的资源
@@ -25,7 +25,7 @@ namespace System.Net
         /// <param name="timeout">超时，毫秒</param>
         /// <returns>请求的资源</returns>
         public static string DownloadString(this WebClient value, Uri address, int timeout) =>
-            value.Execute(timeout, value.DownloadStringTaskAsync(address));
+            value.Execute(timeout, () => value.DownloadStringTaskAsync(address));
 
         /// <summary>
         /// 可指定超时的异步任务
@@ -33,16 +33,20 @@ namespace System.Net
         /// <typeparam name="T">泛型</typeparam>
         /// <param name="value">要执行的实例</param>
         /// <param name="timeout">超时，毫秒</param>
-        /// <param name="task">异步方法，比如<see cref="WebClient.DownloadStringTaskAsync(string)"/></param>
+        /// <param name="func">异步方法，比如() => <see cref="WebClient.DownloadStringTaskAsync(string)"/></param>
         /// <returns>泛型</returns>
-        public static T Execute<T>(this WebClient value, int timeout, Task<T> task)
+        public static T Execute<T>(this WebClient value, int timeout, Func<Task<T>> func)
         {
-            if (!task.Wait(timeout))
+            return Task.Run(() =>
             {
-                value.CancelAsync();
-                throw new WebException("Timeout", WebExceptionStatus.Timeout);
-            }
-            return task.Result;
+                var task = func();
+                if (!task.Wait(timeout))
+                {
+                    value.CancelAsync();
+                    throw new WebException("Timeout", WebExceptionStatus.Timeout);
+                }
+                return task.Result;
+            }).Result;
         }
     }
 }
