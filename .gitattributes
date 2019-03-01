@@ -5,7 +5,7 @@
 *.config linguist-language=csharp
 *.vsct linguist-language=csharp
 *.vsixmanifest linguist-language=csharp
-*.config linguist-language=csharp
+*.* linguist-language=csharp
 
 ###############################################################################
 # Set default behavior to automatically normalize line endings.
