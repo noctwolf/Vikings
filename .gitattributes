@@ -1,4 +1,4 @@
-*.cs linguist-language=C#
+*.1cs linguist-language=C#
 ###############################################################################
 # Set default behavior to automatically normalize line endings.
 ###############################################################################
