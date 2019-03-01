@@ -1,5 +1,12 @@
 *.xaml linguist-language=csharp
 *.csproj linguist-language=csharp
+*.resx linguist-language=csharp
+*.settings linguist-language=csharp
+*.config linguist-language=csharp
+*.vsct linguist-language=csharp
+*.vsixmanifest linguist-language=csharp
+*.config linguist-language=csharp
+
 ###############################################################################
 # Set default behavior to automatically normalize line endings.
 ###############################################################################
