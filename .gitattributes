@@ -1,7 +1,3 @@
-Vikings.Translate.Tests/*.1cs linguist-language=C#
-Vikings.Translate.Tests/Properties/*.1cs linguist-language=C#
-
-
 ###############################################################################
 # Set default behavior to automatically normalize line endings.
 ###############################################################################
