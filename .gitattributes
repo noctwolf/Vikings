@@ -1,9 +1,5 @@
 Vikings.Translate.Tests/*.cs linguist-language=C#
-Vikings.System.Extensions/*.cs linguist-language=C#
-Vikings.Translate/*.cs linguist-language=C#
-Vikings.Swf.Extensions/*.cs linguist-language=C#
-Vikings.Swf/*.cs linguist-language=C#
-Vikings.CodeSite.Extensions/*.cs linguist-language=C#
+Vikings.CodeHelper/*.cs linguist-language=C#
 
 
 ###############################################################################
