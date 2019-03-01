@@ -1,5 +1,5 @@
-Vikings.Translate.Tests/*.cs linguist-language=C#
-Vikings.Translate.Tests/Properties/*.cs linguist-language=C#
+Vikings.Translate.Tests/*.1cs linguist-language=C#
+Vikings.Translate.Tests/Properties/*.1cs linguist-language=C#
 
 
 ###############################################################################
