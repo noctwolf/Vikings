@@ -1,5 +1,5 @@
-Vikings.Translate.Tests/*.1cs linguist-language=C#
-Vikings.Wpf.Extensions/*.cs linguist-language=C#
+Vikings.Translate.Tests/*.cs linguist-language=C#
+Vikings.Wpf.Extensions/*.1cs linguist-language=C#
 
 
 ###############################################################################
