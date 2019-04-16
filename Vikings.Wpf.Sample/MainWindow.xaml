@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:Vikings.Wpf.Sample"
         xmlns:Wpf="clr-namespace:Vikings.Wpf;assembly=Vikings.Wpf" x:Class="Vikings.Wpf.Sample.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        Title="MainWindow" Height="225" Width="400" WindowStartupLocation="CenterScreen">
     <WrapPanel>
-        <Wpf:WindowAlign Height="100" Width="100"/>
+        <Wpf:WindowAlign Height="40" Width="40"/>
     </WrapPanel>
 </Window>
