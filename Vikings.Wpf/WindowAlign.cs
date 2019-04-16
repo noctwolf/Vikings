@@ -2,18 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Vanara.PInvoke;
 
 namespace Vikings.Wpf
@@ -30,57 +24,69 @@ namespace Vikings.Wpf
             ItemsPanelProperty.OverrideMetadata(typeof(WindowAlign), new FrameworkPropertyMetadata(GetDefaultItemsPanelTemplate()));
         }
 
-        public WindowAlign()
-        {
-            ItemsSource = Enum.GetValues(typeof(Location));
-        }
-
-        enum Location { LeftTop, RightTop, LeftBottom, RightBottom };
-
-        private static object GetDefaultItemsPanelTemplate()
+        static object GetDefaultItemsPanelTemplate()
         {
             ItemsPanelTemplate itemsPanelTemplate = new ItemsPanelTemplate(new FrameworkElementFactory(typeof(UniformGrid)));
             itemsPanelTemplate.Seal();
             return itemsPanelTemplate;
         }
 
+        public WindowAlign()
+        {
+            ItemsSource = new List<Dock>
+            {
+                Dock.Left  | Dock.Top,
+                Dock.Right | Dock.Top,
+                Dock.Left  | Dock.Bottom,
+                Dock.Right | Dock.Bottom
+            };
+        }
+
+        [Flags]
+        public enum Dock { None = 0, Left = 1, Right = 2, Top = 4, Bottom = 8 };
+
         protected override void OnSelectionChanged(SelectionChangedEventArgs e)
         {
             base.OnSelectionChanged(e);
             if (e.AddedItems.Count != 1 || e.RemovedItems.Count > 1) return;
-            //CodeSite.SendCollection("RemovedItems", e.RemovedItems);
-            //CodeSite.SendCollection("AddedItems", e.AddedItems);
-            var locationNew = (Location)e.AddedItems[0];
-            if (e.RemovedItems.Count == 0 || (e.RemovedItems[0] is Location locationOld && (int)locationNew + (int)locationOld == 3))
+            Dock dockFrom = e.RemovedItems.Count == 1 ? (Dock)e.RemovedItems[0] : Dock.None;
+            Dock dockTo = (Dock)e.AddedItems[0];
+            if (Align(dockFrom, dockTo, out var location))
             {
-                //CodeSite.Send("1");
-                //SelectedItem = null;
-                return;
+                if (IsMouseCaptured) Mouse.Capture(null);
+                Window.Left = location.X;
+                Window.Top = location.Y;
+                SelectedItem = null;
             }
-            //CodeSite.Send("2");
-            locationOld = (Location)e.RemovedItems[0];
-            var area = SystemParameters.WorkArea;
-
-            Matrix matrix = Matrix.Identity;
-            if (locationOld == Location.RightTop || locationOld == Location.RightBottom) matrix.ScaleAt(-1, 1, area.Width / 2, area.Height / 2);//水平翻转
-            if (locationOld == Location.LeftBottom || locationOld == Location.RightBottom) matrix.ScaleAt(1, -1, area.Width / 2, area.Height / 2);//垂直翻转
-            if (Math.Abs(locationNew - locationOld) == 2) { matrix.Rotate(90); matrix.Scale(-1, 1); }//横纵转换
-
-            Rect item = CaleLocation(EnumWindows(), area, Window.RestoreBounds, matrix);
-
-            if (IsMouseCaptured) Mouse.Capture(null);
-            Window.Left = item.Left;
-            Window.Top = item.Top;
-            SelectedItem = null;
         }
 
-        List<Rect> EnumWindows()
+        public bool Align(Dock dockFrom, Dock dockTo, out Point location)
+        {
+            var area = SystemParameters.WorkArea;
+            var window = Window.RestoreBounds;
+            var listWindow = EnumWindows().Select(f => Rect.Intersect(f, area)).Where(f => f.Width > 0 && f.Height > 0 && f != area);
+            if (dockFrom == Dock.None || (dockFrom & dockTo) == Dock.None)
+            {
+                window.X = (dockTo & Dock.Left) == Dock.Left ? 0 : area.Right - window.Width;
+                window.Y = (dockTo & Dock.Top) == Dock.Top ? 0 : area.Bottom - window.Height;
+                location = window.Location;
+                return !listWindow.Any(f => f.IntersectsWith(window));
+            }
+
+            Matrix matrix = Matrix.Identity;
+            if ((dockFrom & Dock.Right) == Dock.Right) matrix.ScaleAt(-1, 1, area.Width / 2, area.Height / 2);//水平翻转
+            if ((dockFrom & Dock.Bottom) == Dock.Bottom) matrix.ScaleAt(1, -1, area.Width / 2, area.Height / 2);//垂直翻转
+            if (((dockTo & dockFrom) & (Dock.Left | Dock.Right)) != Dock.None) { matrix.Rotate(90); matrix.Scale(-1, 1); }//横纵转换
+            return CaleLocation(listWindow, area, window, matrix, out location);
+        }
+
+        protected virtual List<Rect> EnumWindows()
         {
             var handleWindow = new WindowInteropHelper(Window).Handle;
             var list = new List<Rect>();
             User32_Gdi.EnumWindows((hWnd, _) =>
             {
-                if (User32_Gdi.IsWindowVisible(hWnd) && hWnd != handleWindow && User32_Gdi.GetWindowRect(hWnd, out var lpRect))
+                if (hWnd != handleWindow && User32_Gdi.IsWindowVisible(hWnd) && User32_Gdi.GetWindowRect(hWnd, out var lpRect))
                 {
                     var sb = new StringBuilder(256);
                     User32_Gdi.GetClassName(hWnd, sb, 255);
@@ -91,28 +97,33 @@ namespace Vikings.Wpf
             return list;
         }
 
-        static Rect CaleLocation(IEnumerable<Rect> listWindow, Rect area, Rect window, Matrix matrix)
+        static bool CaleLocation(IEnumerable<Rect> listWindow, Rect area, Rect window, Matrix matrix, out Point location)
         {
-            listWindow = listWindow.Select(f => Rect.Intersect(f, area)).Where(f => f.Width > 0 && f.Height > 0 && f != area);
+            location = window.Location;
             listWindow = listWindow.Select(f => Rect.Transform(f, matrix)).ToList();
             area.Transform(matrix);
-            var move = Rect.Transform(window, matrix);
-            matrix.Invert();
-            move.Location = new Point(0, 0);
-            while (move.Bottom < area.Bottom)
+            window.Transform(matrix);
+            matrix.Invert();//反转
+            window.Location = new Point(0, 0);
+            while (window.Bottom < area.Bottom)
             {
                 double minY = area.Bottom;
-                while (move.Right < area.Right)
+                while (window.Right < area.Right)
                 {
-                    var first = listWindow.FirstOrDefault(f => f.IntersectsWith(move));
-                    if (first == default(Rect)) return Rect.Transform(move, matrix);
-                    move.X = first.Right + 1;
-                    minY = Math.Min(minY, first.Bottom + 1);
+                    var first = listWindow.FirstOrDefault(f => f.IntersectsWith(window));
+                    if (first == default(Rect))
+                    {
+                        window.Transform(matrix);
+                        location = window.Location;
+                        return true;
+                    }
+                    window.X = first.Right + 1;
+                    minY = Math.Min(minY, first.Bottom);
                 }
-                move.X = 0;
-                move.Y = minY;
+                window.X = 0;
+                window.Y = minY + 1;
             }
-            return window;
+            return false;
         }
     }
 }
