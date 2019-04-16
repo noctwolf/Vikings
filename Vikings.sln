@@ -21,6 +21,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vikings.CodeHelper", "Vikin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vikings.Translate.Tests", "Vikings.Translate.Tests\Vikings.Translate.Tests.csproj", "{05489B51-8D73-46A5-87D1-C8AA81C9CB3F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vikings.Wpf", "Vikings.Wpf\Vikings.Wpf.csproj", "{B0571E94-14E2-4196-ADC3-B06791E6FCFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vikings.Wpf.Sample", "Vikings.Wpf.Sample\Vikings.Wpf.Sample.csproj", "{38718202-271E-4D2B-BF18-D59B11C491ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +67,14 @@ Global
 		{05489B51-8D73-46A5-87D1-C8AA81C9CB3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05489B51-8D73-46A5-87D1-C8AA81C9CB3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05489B51-8D73-46A5-87D1-C8AA81C9CB3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0571E94-14E2-4196-ADC3-B06791E6FCFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0571E94-14E2-4196-ADC3-B06791E6FCFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0571E94-14E2-4196-ADC3-B06791E6FCFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0571E94-14E2-4196-ADC3-B06791E6FCFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38718202-271E-4D2B-BF18-D59B11C491ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38718202-271E-4D2B-BF18-D59B11C491ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38718202-271E-4D2B-BF18-D59B11C491ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38718202-271E-4D2B-BF18-D59B11C491ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
