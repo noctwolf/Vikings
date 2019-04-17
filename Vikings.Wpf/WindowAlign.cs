@@ -8,7 +8,6 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
-using Vanara.PInvoke;
 
 namespace Vikings.Wpf
 {
@@ -84,12 +83,12 @@ namespace Vikings.Wpf
         {
             var handleWindow = new WindowInteropHelper(Window).Handle;
             var list = new List<Rect>();
-            User32_Gdi.EnumWindows((hWnd, _) =>
+            NativeMethods.EnumWindows((hWnd, _) =>
             {
-                if (hWnd != handleWindow && User32_Gdi.IsWindowVisible(hWnd) && User32_Gdi.GetWindowRect(hWnd, out var lpRect))
+                if (hWnd != handleWindow && NativeMethods.IsWindowVisible(hWnd) && NativeMethods.GetWindowRect(hWnd, out var lpRect))
                 {
                     var sb = new StringBuilder(256);
-                    User32_Gdi.GetClassName(hWnd, sb, 255);
+                    NativeMethods.GetClassName(hWnd, sb, 255);
                     if (!IgnoreWindow.Contains(sb.ToString())) list.Add(new Rect(lpRect.X, lpRect.Y, lpRect.Width, lpRect.Height));
                 }
                 return true;
