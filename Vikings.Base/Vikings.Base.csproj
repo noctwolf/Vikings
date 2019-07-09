@@ -37,6 +37,7 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collections\Generic\StringLogicalComparer.cs" />
     <Compile Include="Math\Speed.cs" />
     <Compile Include="Math\SpeedQueue.cs" />
     <Compile Include="Net\WebClient.cs">
