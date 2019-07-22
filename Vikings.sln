@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.271
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vikings.Wpf.Extensions", "Vikings.Wpf.Extensions\Vikings.Wpf.Extensions.csproj", "{A546D006-21A6-4163-9070-61E5178341B3}"
 EndProject
@@ -24,6 +24,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vikings.Wpf", "Vikings.Wpf\Vikings.Wpf.csproj", "{B0571E94-14E2-4196-ADC3-B06791E6FCFF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vikings.Wpf.Sample", "Vikings.Wpf.Sample\Vikings.Wpf.Sample.csproj", "{38718202-271E-4D2B-BF18-D59B11C491ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vikings.Base.Tests", "Vikings.Base.Tests\Vikings.Base.Tests.csproj", "{700EF515-5284-4452-9CE3-D2937D191598}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +77,10 @@ Global
 		{38718202-271E-4D2B-BF18-D59B11C491ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38718202-271E-4D2B-BF18-D59B11C491ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38718202-271E-4D2B-BF18-D59B11C491ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{700EF515-5284-4452-9CE3-D2937D191598}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{700EF515-5284-4452-9CE3-D2937D191598}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{700EF515-5284-4452-9CE3-D2937D191598}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{700EF515-5284-4452-9CE3-D2937D191598}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
