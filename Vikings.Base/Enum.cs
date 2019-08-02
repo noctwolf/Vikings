@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 
@@ -17,6 +17,6 @@ namespace Vikings
         /// <returns>包含描述的Dictionary</returns>
         public static Dictionary<TKey, string> ToDictionary<TKey>() where TKey : System.Enum =>
             typeof(TKey).GetEnumValues().OfType<TKey>().ToDictionary(f => f, f =>
-                typeof(TKey).GetMember(f.ToString())[0].GetCustomAttribute<DescriptionAttribute>()?.Description ?? f.ToString());
+                typeof(TKey).GetMember(f.ToString())[0].GetCustomAttribute<DisplayAttribute>()?.Name ?? f.ToString());
     }
 }

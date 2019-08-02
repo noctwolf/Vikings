@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -12,17 +13,17 @@ namespace Vikings.Base.Tests
         {
             var dict = Enum.ToDictionary<Test>();
             dict.ToList().ForEach(f => Console.WriteLine($"{f.Key}={f.Value}"));
-            Assert.IsTrue(dict.Any(f => f.Key == Test.A && f.Value == "AAA"));
-            Assert.IsTrue(dict.Any(f => f.Key == Test.Ab && f.Value == "BBB"));
+            Assert.IsTrue(dict.Any(f => f.Key == Test.A && f.Value == "枚举A"));
+            Assert.IsTrue(dict.Any(f => f.Key == Test.Ab && f.Value == "枚举AB"));
             Assert.IsTrue(dict.Any(f => f.Key == Test.Abc && f.Value == "Abc"));
         }
     }
 
     public enum Test
     {
-        [System.ComponentModel.Description("AAA")]
+        [Display(Name = "枚举A")]
         A,
-        [System.ComponentModel.Description("BBB")]
+        [Display(Name = "枚举AB")]
         Ab,
         //[System.ComponentModel.Description("CCC")]
         Abc
