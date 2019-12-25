@@ -27,9 +27,16 @@ namespace System
                     Encoding encoding = Encoding.Default;
                     try { encoding = Encoding.GetEncoding(hwr.CharacterSet); }
                     catch (Exception ex) { CodeSite.SendException(hwr.CharacterSet, ex); }
-                    StreamReader sr = new StreamReader(hwr.GetResponseStream(), encoding);
-                    text += Environment.NewLine + sr.ReadToEnd();
-                    sr.Close();
+                    try
+                    {
+                        StreamReader sr = new StreamReader(hwr.GetResponseStream(), encoding);
+                        text += Environment.NewLine + sr.ReadToEnd();
+                        sr.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        text += Environment.NewLine + ex.ToString();
+                    }
                 }
             }
             CodeSite.Send(CodeSiteMsgType.Exception, msg ?? value.TargetSite?.ToString(), text);
