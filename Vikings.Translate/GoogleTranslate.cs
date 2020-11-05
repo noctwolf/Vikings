@@ -18,6 +18,13 @@ namespace Vikings.Translate
         public static string BaseUrl { get; set; } = "https://translate.google.cn/";
 
         /// <summary>
+        /// 缓存TKK，避免频繁请求，导致触发保护
+        /// </summary>
+        static string TKK { get; set; } = "";
+
+        private static CookieContainer Cookie { get; set; } = new CookieContainer();
+
+        /// <summary>
         /// 翻译为简体中文
         /// </summary>
         /// <param name="text">待翻译文本</param>
@@ -33,9 +40,22 @@ namespace Vikings.Translate
         /// <returns>翻译后文本</returns>
         public static string Translate(string text, string fromLanguage, string toLanguage)
         {
+            try
+            {
+                return TranslateCore(text, fromLanguage, toLanguage);
+            }
+            catch (WebException ex) when (ex.Status == WebExceptionStatus.ProtocolError && ex.Message.Contains("403"))
+            {
+                //TKK变化，重试一次。Forbidden
+                TKK = "";
+                return TranslateCore(text, fromLanguage, toLanguage);
+            }
+        }
+
+        static string TranslateCore(string text, string fromLanguage, string toLanguage)
+        {
             text = text.StripBidiControlCharacter();
-            var cc = new CookieContainer();
-            var tk = GetTK(text, GetTKK(BaseUrl, cc));
+            var tk = GetTK(text, GetTKK(BaseUrl, out CookieContainer cc));
             string googleTransUrl = BaseUrl + "translate_a/single?client=webapp&sl=" + fromLanguage + "&tl=" + toLanguage + "&hl=en&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=1&tk=" + tk + "&q=" + WebUtility.UrlEncode(text);
             var ResultHtml = GetResultHtml(googleTransUrl, cc, BaseUrl);
             dynamic TempResult = Newtonsoft.Json.JsonConvert.DeserializeObject(ResultHtml);
@@ -44,12 +64,15 @@ namespace Vikings.Translate
             return result;
         }
 
-        static string GetTKK(string GoogleTransBaseUrl, CookieContainer cc)
+        static string GetTKK(string GoogleTransBaseUrl, out CookieContainer cc)
         {
+            cc = Cookie;
+            if (!string.IsNullOrEmpty(TKK)) return TKK;
+            cc = Cookie = new CookieContainer(); 
             var BaseResultHtml = GetResultHtml(GoogleTransBaseUrl, cc, "");
             //TKK变化，json格式。2018-11-30，dxg//tkk:'428764.2089508696',
             var re = new Regex(@"(?<=tkk:')(.*?)(?=',)");
-            return re.Match(BaseResultHtml).ToString();
+            return TKK = re.Match(BaseResultHtml).ToString();
         }
 
         static string GetResultHtml(string url, CookieContainer cc, string refer)
