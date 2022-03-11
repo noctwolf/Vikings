@@ -38,9 +38,11 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CodeDom\CodeExpressionExtension.cs" />
+    <Compile Include="Drawing\ImageExtension.cs" />
     <Compile Include="Int32Extension.cs" />
     <Compile Include="Linq\ClassExtension.cs" />
     <Compile Include="Net\IPAddressExtension.cs" />
