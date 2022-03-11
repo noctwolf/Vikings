@@ -19,7 +19,7 @@ namespace System.Windows.Media.Imaging
         {
             using (var memoryStream = new MemoryStream())
             {
-                value.Save(memoryStream, ImageFormat.Png);
+                value.Save(memoryStream, imageFormat ?? ImageFormat.Png);
                 memoryStream.Position = 0;
                 var bitmapImage = new BitmapImage();
                 bitmapImage.BeginInit();
