@@ -15,9 +15,13 @@ namespace System.Windows
         /// <returns>当前应用程序的可执行文件的路径，包括可执行文件的名称</returns>
         public static string ExecutablePath(this Application value)
         {
+#if NET5_0_OR_GREATER
+            return Assembly.GetEntryAssembly().Location;
+#else
             Uri uri = new Uri(Assembly.GetEntryAssembly().CodeBase);
             if (uri.IsFile) return uri.LocalPath + Uri.UnescapeDataString(uri.Fragment);
             else return uri.ToString();
+#endif
         }
 
         /// <summary>
