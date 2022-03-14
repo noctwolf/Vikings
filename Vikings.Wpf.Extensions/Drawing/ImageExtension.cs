@@ -1,13 +1,13 @@
-﻿using System.Drawing;
-using System.Drawing.Imaging;
+﻿using System.Drawing.Imaging;
 using System.IO;
+using System.Windows.Media.Imaging;
 
-namespace System.Windows.Media.Imaging
+namespace System.Drawing
 {
     /// <summary>
     /// BitmapImage 扩展
     /// </summary>
-    public static class BitmapImageExtension
+    public static class ImageExtension
     {
         /// <summary>
         /// <see cref="Image"/>转换为<see cref="BitmapImage"/>
